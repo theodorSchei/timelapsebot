@@ -11,10 +11,10 @@
 - [ ] Set timelapse to start at sunset
 
 **Timelapse**
-- [ ] Make new folder
-- [ ] Start timelapse in new folder
-- [ ] Resize all photos
-- [ ] Stitch together a timelapse
+- [X] Make new folder
+- [X] Start timelapse in new folder
+- [X] Resize all photos
+- [X] Stitch together a timelapse
 - [ ] Delete photos
 
 **Sharing**

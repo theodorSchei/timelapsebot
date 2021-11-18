@@ -1,6 +1,6 @@
 # Timelapsebot
 
-With this program running, every sunset is captured and made into a neat little timelapse. The program is intended to run on a Raspberry pi with a PiCamera module. 
+With this program running, every sunset is captured and made into a neat little timelapse. The program is intended to run on a Raspberry Pi with a Pi Camera module.
 
 ![Gif of a sunset in oslo made with this program](https://github.com/theodorSchei/timelapsebot/blob/main/media/timelapse.gif?raw=true)
 

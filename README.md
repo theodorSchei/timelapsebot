@@ -8,9 +8,28 @@ With this program running, every sunset is captured and made into a neat little 
 
 
 ## How it works
-The program first calculates todays sunset time using location (lon, lat), and the date. This is a mathematical formula, wich allows for complete of-the-grid operation. (No API calls)
+The program first calculates todays sunset time using location (lon, lat), and the date. This is a mathematical formula, wich allows for complete of-the-grid operation, if thats required (No API calls)
 
-With the sunset time calculated, it adds it to the timelaps job-list. Once it is sunset, the program starts taking pictures, and when it is done starts resizing them to prepare for making the timelapse. Finally a timelapse is stiched together, and everything is stored neatly in a folder system. The last job is to queue tomorrows timelapse, before the job ends.
+With the sunset time calculated, it adds it to the timelapse job-list. Once it is sunset, the program starts taking pictures, and when it is done starts resizing them to prepare for making the timelapse. Finally a timelapse is stiched together, and everything is stored neatly in a folder system. When the timelapse is finished stitching the timelapse is then published with scp to a webhotel.
+
+The last job is to queue tomorrows timelapse, before the job ends.
+
+## Getting started
+Run the program with the command:
+```bash
+npm run start
+```
+
+To run a short timelapse starting now (for debugging) run:
+```bash
+npm run dev
+```
+
+A python script is also added to help with focusing the camera. This can be really tricky on the hq camera. Run with:
+```bash
+python focuspreview.py
+```
+
 
 ## Dependencies
 - raspistill

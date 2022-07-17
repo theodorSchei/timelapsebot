@@ -1,32 +1,15 @@
-/*
-const SunCalc = require('suncalc');
-const schedule = require('node-schedule');
-const fs = require('fs');
-const timelapse = require('./timelapse');
-
-const todaysDate = new Date();
-const myLatitude = ;
-const myLongitude = ;
-
-const sunsetTime = SunCalc.getTimes(todaysDate, myLatitude, myLongitude);
-
-if (fs.existsSync(timelapse.pathToTodaysTimelapseDirectory)) {
-  console.log('Timelapse is already made today!');
-} else {
-  console.log('Planning timelapse for today');
-  var job = schedule.scheduleJob(sunsetTime.sunsetStart, function() {
-    timelapse.create();
-  });
-}
-
-*/
-
 const SunCalc = require('suncalc');
 const NodeSchedule = require('node-schedule');
-const timelapse = require('./timelapse');
+const Timelapse = require('./timelapse');
+const Webhotel = require('./uploadToWebHotel');
 // const fs = require('fs')
 
-const loc = {
+type Location = {
+  lat: number,
+  lon: number,
+}
+
+const loc : Location = {
   lat: 59.901331896946004,
   lon: 10.763861780217825,
 };
@@ -41,17 +24,23 @@ const getNextSunset = () => {
   return sunset;
 };
 
-const runSunsetJob = () => {
+const runSunsetJob = async () => {
   console.log(`Running sunset job at ${new Date()}`);
-  timelapse.create();
-  console.log(
-    new Date()
-      .toISOString()
-      .slice(0, 10)
-      .replace(/-/g, ''),
-  );
-  // ...
-  console.log(`Sunset job finished at ${new Date()}`);
+  try {
+    const timelapsePath = await Timelapse.create(5000000, 10000);
+
+    const uploadStatus = await Webhotel.uploadFile(timelapsePath, 'video/folder/dagens.mp4');
+
+    if (uploadStatus) {
+      console.log('UPLOAD SUCCESSFUL!!!!!!!!!');
+    } else {
+      console.log('UPLOAD FAILED');
+    }
+    console.log(`Sunset job finished at ${new Date()}`);
+  } catch (e) {
+    console.log('Something went wrong');
+    console.log(e);
+  }
 
   // And schedule next job for next sunset.
   const nextJob = getNextSunset();
@@ -62,3 +51,5 @@ const runSunsetJob = () => {
 const nextScheduledSunset = getNextSunset();
 console.log(`Initializing first job, scheduled at ${nextScheduledSunset}`);
 NodeSchedule.scheduleJob(nextScheduledSunset, runSunsetJob);
+
+export {}

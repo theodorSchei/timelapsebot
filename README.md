@@ -10,7 +10,7 @@ With this program running, every sunset is captured and made into a neat little 
 ## How it works
 The program first calculates todays sunset time using location (lon, lat), and the date. This is a mathematical formula, wich allows for complete of-the-grid operation, if thats required (No API calls)
 
-With the sunset time calculated, it adds it to the timelapse job-list. Once it is sunset, the program starts taking pictures, and when it is done starts resizing them to prepare for making the timelapse. Finally a timelapse is stiched together, and everything is stored neatly in a folder system. When the timelapse is finished stitching the timelapse is then published with scp to a webhotel.
+With the sunset time calculated, it adds it to the timelapse job-list. Once it is sunset, the program starts taking pictures, and when it is done starts resizing them to prepare for making the timelapse. Finally a timelapse is stiched together, and everything is stored neatly in a folder system. When the timelapse is finished stitching it is posted to twitter.
 
 The last job is to queue tomorrows timelapse, before the job ends.
 

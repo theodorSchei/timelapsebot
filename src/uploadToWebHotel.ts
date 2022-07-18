@@ -1,4 +1,4 @@
-const { Client } = require('node-scp');
+import { Client } from 'node-scp';
 require('dotenv').config();
 
 const Webhotel : any = {};

@@ -7,7 +7,7 @@ const runSunsetJob = async () => {
   const startTime = new Date()
   console.log(`Running sunset job at ${startTime}`);
   try {
-    const timelapsePath = await Timelapse.create(50000, 10000, true);
+    const timelapsePath = await Timelapse.create(150000, 10000, true);
 
     const uploadStatus = await PostToTwitter(timelapsePath, startTime.toUTCString());
     

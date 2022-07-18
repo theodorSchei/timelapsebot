@@ -1,3 +1,5 @@
+import { PostToTwitter } from "./postToTwitter";
+
 const SunCalc = require('suncalc');
 const NodeSchedule = require('node-schedule');
 const Timelapse = require('./timelapse');
@@ -25,17 +27,19 @@ const getNextSunset = () => {
 };
 
 const runSunsetJob = async () => {
-  console.log(`Running sunset job at ${new Date()}`);
+  const startTime = new Date()
+  console.log(`Running sunset job at ${startTime}`);
   try {
-    const timelapsePath = await Timelapse.create(5000000, 10000);
+    const timelapsePath = await Timelapse.create(150000, 10000, true);
 
-    const uploadStatus = await Webhotel.uploadFile(timelapsePath, 'video/folder/dagens.mp4');
-
+    const uploadStatus = await PostToTwitter(timelapsePath, startTime.toUTCString());
+    
     if (uploadStatus) {
-      console.log('UPLOAD SUCCESSFUL!!!!!!!!!');
+      console.log("Tweet success!");
     } else {
-      console.log('UPLOAD FAILED');
+      console.log("Tweet failed :(");
     }
+    
     console.log(`Sunset job finished at ${new Date()}`);
   } catch (e) {
     console.log('Something went wrong');
